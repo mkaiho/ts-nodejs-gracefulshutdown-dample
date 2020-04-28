@@ -20,3 +20,8 @@ spec:
         name: sample-app
         ports:
           - containerPort: 3000
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sh", "-c", "sleep 3"]
+      terminationGracePeriodSeconds: 30

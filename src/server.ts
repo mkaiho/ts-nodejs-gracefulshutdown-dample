@@ -30,6 +30,7 @@ const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+process.on('SIGTERM', onSigterm);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -84,5 +85,20 @@ function onError(error: NodeJS.ErrnoException): void {
 function onListening(): void {
   const addr = server.address() || '';
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-  debug(`Listening on ${bind}`);
+  console.info(`Listening on ${bind}`);
+}
+
+/**
+ * Event listener for "SIGTERM" signal.
+ */
+
+function onSigterm(): void {
+  console.info('get sigterm signal');
+  server.close((error) => {
+    if (error) {
+      console.info('failed to close server on sigterm.');
+      return;
+    }
+    console.info('closed server on sigterm.');
+  });
 }

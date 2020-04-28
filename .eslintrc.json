@@ -42,7 +42,9 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "no-await-in-loop": "off",
+    "class-methods-use-this": "off"
   },
   "settings": {
     "import/resolver": {

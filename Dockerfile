@@ -22,4 +22,4 @@ COPY --from=builder \
 COPY --from=builder \
 /home/work/ts-nodejs-sample-template/dist \
 /home/ts-nodejs-sample-template/dist
-CMD ["yarn", "start"]
+CMD ["node", "dist/server.js"]
